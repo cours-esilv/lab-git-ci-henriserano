@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-            # Installe java 8 sur l'agent
+      # Installe java 8 sur l'agent
       - name: Set up JDK 8
         uses: actions/setup-java@v2
         with:
@@ -33,18 +33,22 @@ jobs:
       # Compile notre application
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
-            # Publie les résultats de test
+
+      # Publie les résultats de test
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
           files: target/**/*.xml
+
+
       # Publie les fichiers présents dans le dossier target dans un build artifact
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
           name: my-app-1.0
           path: target/*
+
       # Installe la commande docker sur l'agent
       - name: Install Docker
         uses: docker/setup-buildx-action@v1
