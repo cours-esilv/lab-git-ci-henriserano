@@ -57,4 +57,4 @@ jobs:
       # Build l'image Docker
       - name: Docker build
         run: |
-          docker build . -t my-app:1.0 Dockerfile
+          docker build .
