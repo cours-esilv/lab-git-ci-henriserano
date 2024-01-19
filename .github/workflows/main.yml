@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-            # Installe java 8 sur l'agent
+      # Installe java 8 sur l'agent
       - name: Set up JDK 8
         uses: actions/setup-java@v2
         with:
@@ -39,12 +39,14 @@ jobs:
         if: always()
         with:
           files: target/**/*.xml
+
       # Publie les fichiers présents dans le dossier target dans un build artifact
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
           name: my-app-1.0
           path: target/*
+
       # Installe la commande docker sur l'agent
       - name: Install Docker
         uses: docker/setup-buildx-action@v1
@@ -55,4 +57,4 @@ jobs:
       # Build l'image Docker
       - name: Docker build
         run: |
-          docker build .
+          docker build . -t my-app:1.0 Dockerfile
